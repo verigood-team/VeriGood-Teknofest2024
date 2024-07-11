@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aspect Based Sentiment Analysis Preparation Tool</title>
+    <style>
+        body {
+            font-family: "Gill Sans", sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #141010;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+        }
+
+        
+        .file-input-label {
+            display: inline-block;
+            background-color: #876464;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            width: 100px;
+        }
+
+        .file-input-label:hover {
+            background-color: #2eb872;
+        }
+
+        .file-input-label input[type="file"] {
+            display: none;
+        }
+
+        .sentence {
+            margin-bottom: 20px;
+            word-spacing: -2px;
+        }
+
+        .word {
+            display: inline-block;
+            padding: 2px 4px;
+            margin: 2px;
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+
+        .selected-entity {
+            border: 1px solid blue;
+            background-color: #add8e6;
+        }
+
+        .selected-opinion {
+            border: 1px solid green;
+            background-color: #add8e6;
+        }
+        
+        .sentiment option:nth-child(1) {
+          background-color: #90ee90;
+        }
+
+        .sentiment option:nth-child(2) {
+          background-color: #ffb6c1;
+        }
+
+        .sentiment option:nth-child(3) {
+          background-color: #D3D3D3;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin-top: 10px;
+        }
+
+        .label-group {
+            display: flex;
+            margin-top: 5px;
+            width: 25px;
+        }
+
+        .label-group select {
+            margin-right: 5px;
+        }
+
+        .label-group input[type="text"] {
+            flex: 1;
+            margin-right: 5px;
+            padding: 5px;
+        }
+
+        #output {
+            font-size: 1em; 
+            font-family: "Gill Sans", sans-serif;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc; 
+            padding: 10px; 
+            width: 100%; 
+            height: 200px; 
+            resize: none; 
+}
+
+    </style>
+</head>
+<body>
+    <h1>Aspect Based Sentiment Analysis Preparation Tool</h1>
+    <label for="fileInput" class="file-input-label" style="background-color: #088F8F; color: white; font-size: 1em; font-family: Tahoma, sans-serif; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; width: 130px; margin-bottom: 10px">
+        <span>Upload a File</span>
+        <input type="file" id="fileInput" accept=".txt" onchange="loadFile(event)">
+    </label>
+    <div id="sentence-container"></div>
+    <button class="show-results" onclick="showResults()" style="background-color: #686ee2; color: white; font-size: 1em; font-family: Tahoma, sans-serif; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; width: 130px; margin-top: 10px">Show Results</button>
+    <textarea id="output" readonly></textarea>
+    <button onclick="downloadResults()" style="background-color: #233142; color: white; font-size: 1em; font-family: Tahoma, sans-serif; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; float: right; width: 160px;"> Download Results </button>
+
+
+    <script>
+    
+        let sentences = [];
+        let currentSelectedEntities = [];
+        let currentSelectedOpinions = [];
+        let currentPhase = 'entity'; // entity | opinion | sentiment
+        let currentActiveTextbox = null;
+
+        // Load & read file
+        function loadFile(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const text = e.target.result;
+                sentences = text.split('\n').filter(sentence => sentence.trim() !== '');
+                init();
+            };
+            reader.readAsText(file);
+        }
+
+        // handle sentences
+        function init() {
+            const container = document.getElementById('sentence-container');
+            container.innerHTML = '';
+
+            sentences.forEach((sentence, index) => { // cümlelerini al
+                const sentenceDiv = document.createElement('div');
+                sentenceDiv.classList.add('sentence');
+
+                const words = sentence.split(' '); // kelimelerine splitle ve tıklanabilme özelliği ver
+                const wordsSpan = words.map((word, wordIndex) => `<span class="word" data-index="${wordIndex}" onclick="toggleSelect(${index}, ${wordIndex})">${word}</span>`).join(' ');
+
+                sentenceDiv.innerHTML = `
+                    <div>${wordsSpan}</div>
+                    <div id="labels-${index}"></div>
+                    
+
+                `;
+
+                container.appendChild(sentenceDiv);
+                 addLabel(index);
+            });
+        }
+
+        // toggle word selection
+        function toggleSelect(sentenceIndex, wordIndex) { 
+            const wordSpan = document.querySelector(`.sentence:nth-child(${sentenceIndex + 1}) .word[data-index="${wordIndex}"]`); // kelimeyi seç
+            if (currentPhase === 'entity') {  // zaten seçilmiş entitye tıklıyosa sil
+                if (wordSpan.classList.contains('selected-entity')) {
+                    wordSpan.classList.remove('selected-entity');
+                    currentSelectedEntities = currentSelectedEntities.filter(index => index !== wordIndex);
+                } else { // temiz kelimeye tıklıyosa entitye ata
+                    wordSpan.classList.add('selected-entity');
+                    currentSelectedEntities.push(wordIndex);
+                    updateActiveTextbox();
+                }
+            } else if (currentPhase === 'opinion') {
+                if (wordSpan.classList.contains('selected-opinion')) {
+                    wordSpan.classList.remove('selected-opinion');
+                    currentSelectedOpinions = currentSelectedOpinions.filter(index => index !== wordIndex);
+                } else {
+                    wordSpan.classList.add('selected-opinion');
+                    currentSelectedOpinions.push(wordIndex);
+                    updateActiveTextbox();
+                }
+            }
+            
+        }
+
+        // active textbox with selected words
+        function updateActiveTextbox() {
+            if (currentActiveTextbox) {
+                const selectedWords = currentPhase === 'entity' ? currentSelectedEntities : currentSelectedOpinions;
+                currentActiveTextbox.value = `[${selectedWords.join(',')}]`;
+            }
+        }
+
+        // add a new label set for a sentence
+        function addLabel(index) {
+            const labelsDiv = document.getElementById(`labels-${index}`);
+            const labelGroup = document.createElement('div');
+            labelGroup.classList.add('label-group');
+            labelGroup.innerHTML = `
+                <input type="text" class="entity-opinion" placeholder="Entity">
+                <input type="text" class="entity-opinion" placeholder="Opinion">
+                <select class="sentiment", style="background-color: #90ee90">
+                    <option value="POS">POSITIVE</option>
+                    <option value="NEG">NEGATIVE</option>
+                    <option value="NEU">NEUTRAL</option>
+                </select>
+                <button class="remove-label" onclick="removeLabel(this)" style="background-color: #ff0000; color: white; font-size: 1em; font-family: Tahoma, sans-serif; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">Remove</button>
+                
+                <button class="add-label" onclick="addLabel(${index})" style="background-color: #ffe98a; color: black; font-size: 1em; font-family: Tahoma, sans-serif; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; margin-left: 10px">Add</button>
+
+            `;
+            labelsDiv.appendChild(labelGroup);
+
+            const entityOpinionInputs = labelGroup.querySelectorAll('.entity-opinion');
+            entityOpinionInputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    currentActiveTextbox = this;
+                    currentPhase = input.classList.contains('entity') ? 'entity' : 'opinion';
+                    resetWordSelection(); // metin kutusuna tıkladığında sıfırlar
+                });
+            });
+            
+            const sentimentColor = labelGroup.querySelectorAll('.sentiment');
+            sentimentColor.forEach(select => {
+                select.addEventListener('click', function() {
+                    const selectedOption = this.value;
+                    select.style.backgroundColor = getColorForSentiment(selectedOption);
+                });
+            });
+            
+            // Function to get color based on sentiment
+function getColorForSentiment(sentiment) {
+    switch(sentiment) {
+        case 'POS':
+            return '#90ee90'; // Greenish for positive
+        case 'NEU':
+            return '#D3D3D3'; // Greyish for neutral
+        case 'NEG':
+            return '#ffb6c1'; // Pinkish for negative
+        default:
+            return '#f9f9f9'; // Default to white for any unexpected value
+    }
+}
+
+        }
+
+        // seçilen etketi siler
+        function removeLabel(button) {
+            const labelGroup = button.parentElement;
+            labelGroup.remove();
+        }
+
+        // seçilen kelimeleri (textboxlardan) sıfırlar
+        function resetWordSelection() {
+            currentSelectedEntities = [];
+            currentSelectedOpinions = [];
+            const selectedWords = document.querySelectorAll('.word.selected-entity, .word.selected-opinion');
+            selectedWords.forEach(word => {
+                word.classList.remove('selected-entity');
+                word.classList.remove('selected-opinion');
+            });
+            updateActiveTextbox();
+        }
+
+        function showResults() {
+            const results = sentences.map((sentence, index) => {
+                const labelsDiv = document.getElementById(`labels-${index}`);
+                const labelGroups = labelsDiv.getElementsByClassName('label-group');
+                const labels = Array.from(labelGroups).map(group => {
+                    const entity = group.querySelector('.entity-opinion[placeholder="Entity"]').value;
+                    const opinion = group.querySelector('.entity-opinion[placeholder="Opinion"]').value;
+                    const sentiment = group.querySelector('.sentiment').value;
+                    return `(${entity}, ${opinion}, '${sentiment}')`;
+                });
+                return `${sentence.trim()} ####[${labels.join(', ')}]`;
+            });
+            document.getElementById('output').value = results.join('\n');
+        }
+        
+
+        function downloadResults() {
+            const textToSave = document.getElementById('output').value;
+            const blob = new Blob([textToSave], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = 'results.txt';
+            document.body.appendChild(a);
+            a.click();
+
+            // Temizleme işlemleri
+            setTimeout(() => {
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            }, 0);
+        }
+
+        // fileInput id'yi dinle / change -> dosya yüklenebilir, değiştirilebilir
+        document.getElementById('fileInput').addEventListener('change', loadFile);
+       
+        
+    </script>
+</body>
+</html>

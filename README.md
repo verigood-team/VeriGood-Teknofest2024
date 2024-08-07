@@ -15,23 +15,20 @@
 Projenin çalıştırılması için gerekli tüm bağlılıkların eksiksiz bir listesini [requirements.txt](requirements.txt) sayfasında bulabilirsiniz.  
 
 
-## Başlarken
-Projenin çalıştırılması için izlenecek tüm adımlar
+## Derleme
+Projenin çalıştırılması için izlenecek tüm adımlar:
 #### kaynak kodu üzerinden yükleme
 ```bash
-https://github.com/verigood-team/nlp-scenario.git
+git clone https://github.com/verigood-team/nlp-scenario.git
 ```
+#### Test Kodu
 
-## Derleme
+```triplet_extractor = ASTE.AspectSentimentTripletExtractor(r"checkpoints\all_part4_44.77")
 
-### Aspect Sentiment Tripler Extraction Test Kodu
-
-```# triplet_extractor = ASTE.AspectSentimentTripletExtractor(r"checkpoints\all_part4_44.77")
-
-# examples = ["Vodafone hem ucuz hem de her yerde çekiyor herkese tavsiye ederim",]
+examples = ["Vodafone hem ucuz hem de her yerde çekiyor herkese tavsiye ederim",]
     
-# for i in range(1000):
-#     triplet_extractor.predict(input())
+for i in range(1000):
+    triplet_extractor.predict(input())
 
 ```
 

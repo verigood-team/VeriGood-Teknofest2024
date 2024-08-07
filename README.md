@@ -17,6 +17,23 @@ Projenin çalıştırılması için gerekli tüm bağlılıkların eksiksiz bir 
 
 ## Başlarken
 Projenin çalıştırılması için izlenecek tüm adımlar
+#### kaynak kodu üzerinden yükleme
+```bash
+https://github.com/verigood-team/nlp-scenario.git
+```
+
+## Derleme
+
+### Aspect Sentiment Tripler Extraction Test Kodu
+
+```# triplet_extractor = ASTE.AspectSentimentTripletExtractor(r"checkpoints\all_part4_44.77")
+
+# examples = ["Vodafone hem ucuz hem de her yerde çekiyor herkese tavsiye ederim",]
+    
+# for i in range(1000):
+#     triplet_extractor.predict(input())
+
+```
 
 ## Katkıda Bulunanlar
 Bu süreç içerisinde projeye katkıda bulunanlar  

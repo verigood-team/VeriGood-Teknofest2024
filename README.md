@@ -4,9 +4,7 @@
 
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
+    <!-- <img src="images/logo.png" alt="Logo" width="80" height="80"> -->
 </div>
 
 
@@ -19,17 +17,10 @@
 
 
 ## Contributors
-
-<a href="https://github.com/eablak">
-  <img src="https://contrib.rocks/image?repo=https://github.com/eablak" />
-</a>
-<a href="https://github.com/semanurbudun">
-  <img src="https://contrib.rocks/image?repo=https://github.com/semanurbudun" />
-</a>
-<a href="https://github.com/ifurkanatasoy">
-  <img src="https://contrib.rocks/image?repo=https://github.com/ifurkanatasoy" />
-</a>
-
+Bu süreç içerisinde projeye katkıda bulunan herkese teşekkürler!
+[Esra Ablak](https://github.com/eablak)
+[Semanur Büdün](https://github.com/semanurbudun)
+[İsmail Furkan Atasoy](https://github.com/ifurkanatasoy)
 
 
 ## Lisans

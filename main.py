@@ -34,7 +34,7 @@ if __name__ == "__main__":
 
 # MANUEL TEST
 
-# triplet_extractor = ASTE.AspectSentimentTripletExtractor(r"checkpoints\all_part4_44.77")
+# triplet_extractor = ASTE.AspectSentimentTripletExtractor(r"checkpoints\dataset_45.31")
 
 # examples = ["Vodafone hem ucuz hem de her yerde çekiyor herkese tavsiye ederim",]
     

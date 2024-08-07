@@ -22,8 +22,8 @@ Projenin çalıştırılması için izlenecek tüm adımlar:
 git clone https://github.com/verigood-team/nlp-scenario.git
 ```
 #### Test Kodu
-
-```triplet_extractor = ASTE.AspectSentimentTripletExtractor(r"checkpoints\all_part4_44.77")
+```
+triplet_extractor = ASTE.AspectSentimentTripletExtractor(r"checkpoints\dataset_45.31")
 
 examples = ["Vodafone hem ucuz hem de her yerde çekiyor herkese tavsiye ederim",]
     

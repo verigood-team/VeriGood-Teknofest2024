@@ -32,6 +32,10 @@ for i in range(1000):
 
 ```
 
+## Veri Seti Bağlantısı
+
+https://drive.google.com/drive/folders/1EI9ZnBAG9Ce8YxdhlPi30K2tNzrfg4Ts
+
 ## Katkıda Bulunanlar
 Bu süreç içerisinde projeye katkıda bulunanlar  
 [Esra Ablak](https://github.com/eablak)  

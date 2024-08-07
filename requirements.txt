@@ -1,24 +1,14 @@
-pip install torch
-pip install scikit-learn
-pip install regex
-pip install numpy
-pip install tqdm
-pip install spacy
-pip install termcolor
-pip install pytest-shutil
-pip install requests
-pip install packaging
-pip install argparse
-pip install hashlib
-pip install pytorch-warmup
-pip install pandas
-pip install pytest-warnings
-pip install transformers
-pip install metric-visualizer
-pip install findfile
-pip install gitpython
-pip install autocuda
-pip install fastapi
-pip install pydantic
-pip install uvicorn
-pip install beautifulsoup4
+https://huggingface.co/turkish-nlp-suite/tr_core_news_lg/resolve/main/tr_core_news_lg-any-py3-none-any.whl
+torch==2.1.1
+transformers==4.25.1
+spacy==3.4.4
+autocuda==0.16
+termcolor==2.4.0
+findfile==2.0.1
+GitPython==3.1.43
+numpy==1.26.2
+scikit-learn==1.3.2
+metric-visualizer==0.9.13.post1
+pytorch-warmup==0.1.1
+sentencepiece==0.2.0
+protobuf==3.20.3

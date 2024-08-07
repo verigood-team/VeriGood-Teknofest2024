@@ -17,7 +17,7 @@ Projenin çalıştırılması için gerekli tüm bağlılıkların listesini [re
 
 ## Derleme
 Projenin çalıştırılması için izlenecek tüm adımlar:
-#### kaynak kodu üzerinden yükleme
+#### Kaynak kodu üzerinden yükleme
 ```bash
 git clone https://github.com/verigood-team/nlp-scenario.git
 ```

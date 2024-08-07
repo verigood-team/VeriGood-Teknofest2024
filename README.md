@@ -12,7 +12,7 @@
 
 
 ## Gereklilikler
-Projenin çalıştırılması için gerekli tüm bağlılıkların eksiksiz bir listesini [requirements.txt](requirements.txt) sayfasında bulabilirsiniz.  
+Projenin çalıştırılması için gerekli tüm bağlılıkların listesini [requirements.txt](requirements.txt) sayfasında bulabilirsiniz.  
 
 
 ## Derleme
@@ -25,7 +25,7 @@ git clone https://github.com/verigood-team/nlp-scenario.git
 ```
 triplet_extractor = ASTE.AspectSentimentTripletExtractor(r"checkpoints\dataset_45.31")
 
-examples = ["Vodafone hem ucuz hem de her yerde çekiyor herkese tavsiye ederim",]
+# example = "Vodafone hem ucuz hem de her yerde çekiyor herkese tavsiye ederim"
     
 for i in range(1000):
     triplet_extractor.predict(input())

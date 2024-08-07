@@ -39,7 +39,7 @@ https://drive.google.com/drive/folders/1EI9ZnBAG9Ce8YxdhlPi30K2tNzrfg4Ts
 ## Katkıda Bulunanlar
 Bu süreç içerisinde projeye katkıda bulunanlar  
 [Esra Ablak](https://github.com/eablak)  
-[Fatih Ayaz](https://github.com/fatihayaz78)
+[Fatih Ayaz](https://github.com/fatihayaz78)  
 [Semanur Büdün](https://github.com/semanurbudun)  
 [İsmail Furkan Atasoy](https://github.com/ifurkanatasoy)  
 

@@ -12,3 +12,5 @@ metric-visualizer==0.9.13.post1
 pytorch-warmup==0.1.1
 sentencepiece==0.2.0
 protobuf==3.20.3
+uvicorn==0.30.3
+fastapi==0.111.1

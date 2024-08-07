@@ -3,11 +3,9 @@
 <a id="readme-top"></a>
 
 <br />
-<div align="center">
-    <!-- <img src="images/logo.png" alt="Logo" width="80" height="80"> -->
-</div>
-
-
+<!-- <div align="center">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
+</div> -->
 
 ## Hakkında
 
@@ -19,9 +17,7 @@
 ## Katkıda Bulunanlar
 Bu süreç içerisinde projeye katkıda bulunan herkese teşekkürler!
 [Esra Ablak](https://github.com/eablak)
-
 [Semanur Büdün](https://github.com/semanurbudun)
-
 [İsmail Furkan Atasoy](https://github.com/ifurkanatasoy)
 
 

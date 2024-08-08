@@ -34,7 +34,7 @@ for i in range(1000):
 
 ## Veri Seti Bağlantısı
 
-https://drive.google.com/drive/folders/1EI9ZnBAG9Ce8YxdhlPi30K2tNzrfg4Ts
+https://drive.google.com/drive/folders/1YMFxBPbuQjaEGwL-OdXXR-QF7AMJogOY?usp=sharing
 
 ## Katkıda Bulunanlar
 Bu süreç içerisinde projeye katkıda bulunanlar  

@@ -1,5 +1,3 @@
-# Acıkhack2024TDDİ
-
 <!-- <br /> -->
 <!-- <div align="center">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
@@ -7,6 +5,7 @@
 
 ## Hakkında
 
+* Bu proje Teknofest 2024 Doğal Dil İşleme Senaryo Kategorisi kapsamında 86 takım arasından 4. olmuştur.
 * Veri seti, çeşitli sektörlerden farklı firmalar veya kurumlar hakkında müşteri yorumlarını içermektedir.
 * Proje, verilen yorumları öncelikle entity'e göre sıralar, sonrasında ise entity'lerin sunduğu hizmetler veya ürünlerle ilgili yorumlardaki duyguları (olumlu, olumsuz veya nötr) belirler.
 
